@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Spring SecureMVC Archetype</title>
+		<style>
+			.right {
+				float:right;
+			}
+
+			.hide {
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="right">
+				<span sec:authorize="isAuthenticated()"><th:block sec:authentication="name">jdoe</th:block> | <a href="#" onclick="document.getElementById('logout').submit();">Logout</a></span>
+				<a href="login.html" th:href="@{login}" sec:authorize="isAnonymous()">Login</a>
+			</div>
+		</header>
+		<section>
+			<h1>Hello, World</h1>
+		</section>
+
+		<form id="logout" class="hide" action="/logout" th:action="@{/logout}" method="POST">
+			<input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+		</form>
+	</body>
+</html>
+
